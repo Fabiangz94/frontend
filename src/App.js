@@ -1,5 +1,5 @@
 import './css/App.css';
-import Navbar from './components/Navbar';
+import Navbar from './components/navbar/Navbar';
 import Nosotros from './components/Nosotros';
 import Home from './components/Home';
 import Footer from './components/footer';
@@ -10,14 +10,14 @@ import ComponenteClase from './components/ejemplos/ComponenteClase';
 import CategoriasIndex from './components/categorias';
 import ProductosIndex from './components/productos';
 import UsuariosIndex from './components/usuarios';
-
+import LoginView from './components/usuarios/login';
 
 function App() {
   return (
 
     <div>
       <div className="App">
-        <Navbar/>
+        <Navbar logged={false}/>
         <Routes>
           <Route path="/" element={<Home/>}/>
           <Route path="/nosotros" element={<Nosotros/>}/>
@@ -27,6 +27,7 @@ function App() {
           <Route path="/categorias" element={<CategoriasIndex/>}/>
           <Route path="/productos" element={<ProductosIndex/>}/>
           <Route path="/usuario" element={<UsuariosIndex/>}/>
+          <Route path="/login" element={<LoginView/>}/>
         </Routes>        
         <Footer/>
       </div>

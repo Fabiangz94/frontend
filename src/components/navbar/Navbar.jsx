@@ -1,4 +1,5 @@
 import {Link} from "react-router-dom";
+import LogButton from "./LogButton";
 
 function Navbar (props){
     return(
@@ -16,6 +17,7 @@ function Navbar (props){
                     <Link to={"/usuario"} className="me-3 py-2 text-dark text-decoration-none">Usuario</Link>
                     <Link to={"/nosotros"} className="me-3 py-2 text-dark text-decoration-none">Nosotros</Link>
                     <Link to={"/ejemplos"} className="me-3 py-2 text-dark text-decoration-none">Ejemplos</Link>
+                    <LogButton logged={props.logged}/>
                 </nav>
             </div>
         </div>
