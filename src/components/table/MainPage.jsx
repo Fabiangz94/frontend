@@ -1,0 +1,26 @@
+import Table from "./table";
+import CreateButton from "./CreateBotton";
+import SearchBar from "./SearchBar";
+import { useState } from "react";
+
+function MainPage(props){
+    const [dataForTable, setDataforTable] = useState(props.data);
+    return(
+        <div>
+            <div className="d-flex text-center mx-auto w-100">
+                <CreateButton path={props.path}/>
+                <SearchBar data={props.data} setDataforTable={setDataforTable} columns={props.columns} />
+            </div>
+            <Table 
+                data={dataForTable} 
+                path={props.path}
+                name={props.name} 
+                columns={props.columns} 
+                columnsAlias={props.columnsAlias}
+                tools={props.tools} 
+            />
+        </div>
+    );
+}
+
+export default MainPage;

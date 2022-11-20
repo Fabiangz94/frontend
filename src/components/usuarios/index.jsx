@@ -1,5 +1,5 @@
-import Table from "../table/table";
 import getData from "../../js/getData";
+import MainPage from "../table/MainPage";
 
 function UsuariosIndex (props){
     let datosTabla= getData("url",{},"get",{});
@@ -7,7 +7,8 @@ function UsuariosIndex (props){
         <div>
             <h3>Usuarios</h3>
             <p>Bienvenidos a la pagina de administración de usuarios</p>
-            <Table 
+
+            <MainPage
                 data={datosTabla} 
                 path={"/usuario"}
                 name={"Tabla de Usuarios"} 
@@ -15,6 +16,7 @@ function UsuariosIndex (props){
                 columnsAlias={["ID","Nombre","Correo","Usuario","Contrasena"]}
                 tools={["update","delete"]} 
             />
+
         </div>
     );
 }
