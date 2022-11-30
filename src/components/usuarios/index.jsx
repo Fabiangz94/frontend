@@ -1,24 +1,53 @@
-import getData from "../../js/getData";
-import MainPage from "../table/MainPage";
+import {loadData} from "../../js/getData";
+import { getRequest } from "../../js/getData";
+import '../../css/App.css';
+import { useEffect, useState } from "react";
+import BodyIndex from "./bodyIndex";
+import backendConfig from "../../config";
 
-function UsuariosIndex (props){
-    let datosTabla= getData("url",{},"get",{});
-    return(
-        <div>
-            <h3>Usuarios</h3>
-            <p>Bienvenidos a la pagina de administración de usuarios</p>
-
-            <MainPage
-                data={datosTabla} 
-                path={"/usuario"}
-                name={"Tabla de Usuarios"} 
-                columns={["id","firstName","email","username","password"]} 
-                columnsAlias={["ID","Nombre","Correo","Usuario","Contrasena"]}
-                tools={["update","delete"]} 
-            />
-
-        </div>
+function UserIndex(props) {
+  //let datosTabla = getData("url",{},"get",{});
+  let data = loadData();
+  const [datosTabla, setDatosTabla] = useState(data);
+  const [state, setState] = useState("loading");
+  const [error, setError] = useState("");
+  useEffect(()=>{
+    let promiseData = getRequest(
+      backendConfig.FULL_API_PATH + "usuarios/all",
+      {},
+      "get",
+      {}
     );
+    promiseData
+      .then(function(response){
+        console.log(response);
+        setState("loaded");
+        setDatosTabla(response.data);
+      })
+      .catch(function (err) {
+        setState("error");
+        setError (err);
+        console.log(err);
+      });
+
+  },[]);
+
+  if (state === "error"){
+    return(
+      <div className="mx-4">
+        <h3>{error.toString()}</h3>
+      </div>
+    );
+  }
+   
+  if (state === "loading"){
+    return(
+      <div className="mx-4">
+        <h3>Cargando datos...</h3>
+      </div>
+    );
+  }
+  return <BodyIndex datosTabla = {datosTabla}></BodyIndex>;
 }
 
-export default UsuariosIndex;
+export default UserIndex;
